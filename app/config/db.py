@@ -7,11 +7,11 @@ class User(db.Model):
     username = db.Column(db.String(50), nullable = False)
     username = db.Column(db.String(50), nullable = False)
 
-class Heladeria(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+# class Heladeria(db.Model):
+#     id = db.Column(db.Integer, primary_key = True)
     
-class Producto(db.Model):
-    pass
+# class Producto(db.Model):
+#     pass
 
-class Ingredientes(db.Model):
-    pass
+# class Ingredientes(db.Model):
+#     pass

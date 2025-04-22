@@ -1,26 +1,26 @@
 from flask import Flask, render_template, request, redirect, url_for
-from app.config.auth import login_manager, logout_user
-from flask_login import login_user
+from flask_login import login_user, logout_user, current_user
+from app.config.auth import login_manager
 from app.config.db import db, User
 
-def create_app():
+def create_app(config):
 
     app = Flask(__name__, template_folder = 'views')
     app.config.from_object(config)
     
     login_manager.init_app(app)
-    db.init_app(db)
+    db.init_app(app)
 
     @login_manager.user_loader
-    def load_user(user_id: int) -> User:
-        user = User.query.get(int(user_id))
+    def load_user(user_id: str) -> User:
+        user = User.query.get(str(user_id))
         return user
     
     @app.route('/')
     def home():
         return render_template('home.html')
     
-    @app.route('login', methods = ['GET', 'POST'])
+    @app.route('/login', methods = ['GET', 'POST'])
     def login():
         if request.method == 'GET':
             return render_template('login.html')
